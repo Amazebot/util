@@ -24,14 +24,20 @@
       "@commitlint/config-conventional"
     ]
   },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -e $GIT_PARAMS"
+    }
+  },
   "scripts": {
     "pretest": "lerna bootstrap",
     "test": "nyc mocha **/*.spec.ts",
+    "precompile": "yarn test",
     "compile": "rimraf ./packages/*/lib && tsc -b packages",
     "commit": "git-cz",
-    "commitmsg": "commitlint -e $GIT_PARAMS",
-    "prepublish": "yarn compile",
-    "publish": "lerna publish",
+    "prerelease": "yarn compile",
+    "release": "lerna publish",
+    "release:local": "yarn release --registry http://localhost:4873 --skip-git",
     "updated": "lerna updated",
     "practice": "lerna publish --skip-git --skip-npm --conventional-commits"
   },

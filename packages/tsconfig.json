@@ -1,0 +1,7 @@
+{
+  "files": [],
+  "references": [
+    { "path": "config" },
+    { "path": "logger" }
+  ]
+}

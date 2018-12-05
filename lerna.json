@@ -1,0 +1,19 @@
+{
+  "packages": [
+    "packages/*"
+  ],
+  "npmClient": "yarn",
+  "command": {
+    "publish": {
+      "conventionalCommits": true,
+      "ignoreChanges": [
+        "*.md",
+        "*.spec.ts"
+      ]
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "independent"
+}

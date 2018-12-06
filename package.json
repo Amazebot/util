@@ -37,11 +37,12 @@
     "compile": "rimraf ./packages/*/lib && tsc -b packages",
     "commit": "git-cz",
     "updated": "lerna updated",
-    "practice": "lerna publish --skip-git --skip-npm --conventional-commits",
+    "practice": "lerna version",
     "prerelease": "yarn compile",
-    "release": "lerna publish",
-    "release:next": "yarn release --npm-tag next",
-    "release:local": "yarn release --registry http://localhost:4873 --skip-git",
+    "release": "lerna publish --registry https://registry.npmjs.org",
+    "release:current": "yarn release -- --from-package",
+    "release:next": "yarn release -- --npm-tag next",
+    "release:local": "yarn release -- --registry http://localhost:4873 --skip-git",
     "rollback:local": "lerna exec -- npm unpublish --registry http://localhost:4873"
   },
   "devDependencies": {

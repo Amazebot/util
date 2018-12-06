@@ -30,16 +30,19 @@
     }
   },
   "scripts": {
+    "add:local": "yarn add --registry http://localhost:4873",
     "pretest": "lerna bootstrap",
-    "test": "nyc mocha **/*.spec.ts",
+    "test": "nyc mocha **/*.spec.ts --opts mocha.opts",
     "precompile": "yarn test",
     "compile": "rimraf ./packages/*/lib && tsc -b packages",
     "commit": "git-cz",
+    "updated": "lerna updated",
+    "practice": "lerna publish --skip-git --skip-npm --conventional-commits",
     "prerelease": "yarn compile",
     "release": "lerna publish",
+    "release:next": "yarn release --npm-tag next",
     "release:local": "yarn release --registry http://localhost:4873 --skip-git",
-    "updated": "lerna updated",
-    "practice": "lerna publish --skip-git --skip-npm --conventional-commits"
+    "rollback:local": "lerna exec -- npm unpublish --registry http://localhost:4873"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.2.1",

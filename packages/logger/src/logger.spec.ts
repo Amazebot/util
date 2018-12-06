@@ -3,24 +3,13 @@ import { expect } from 'chai'
 import * as sinon from 'sinon'
 import { silence, replace, logger, restore, clone } from '.'
 
-const log = sinon.stub(console, 'log')
-const warn = sinon.stub(console, 'warn')
-const err = sinon.stub(console, 'error')
 const spy = sinon.spy()
 const spyLog = { debug: spy, info: spy, warning: spy, error: spy }
 
 describe('[logger]', () => {
-  afterEach(() => {
-    log.resetHistory()
-    warn.resetHistory()
-    err.resetHistory()
+  beforeEach(() => {
     spy.resetHistory()
     restore()
-  })
-  after(() => {
-    log.restore()
-    warn.restore()
-    err.restore()
   })
   describe('replace', () => {
     it('replaces logger methods with external utility', () => {
@@ -55,26 +44,34 @@ describe('[logger]', () => {
     context('default', () => {
       describe('.debug', () => {
         it('writes to console.log', () => {
+          const log = sinon.stub(console, 'log')
           logger.debug('test')
           sinon.assert.calledWithExactly(log, 'test')
+          log.restore()
         })
       })
       describe('.info', () => {
         it('writes to console.log', () => {
+          const log = sinon.stub(console, 'log')
           logger.debug('test')
           sinon.assert.calledWithExactly(log, 'test')
+          log.restore()
         })
       })
       describe('.warning', () => {
-        it('writes to console.log', () => {
-          logger.debug('test')
-          sinon.assert.calledWithExactly(log, 'test')
+        it('writes to console.warn', () => {
+          const warn = sinon.stub(console, 'warn')
+          logger.warning('test')
+          sinon.assert.calledWithExactly(warn, 'test')
+          warn.restore()
         })
       })
       describe('.error', () => {
-        it('writes to console.log', () => {
-          logger.debug('test')
-          sinon.assert.calledWithExactly(log, 'test')
+        it('writes to console.error', () => {
+          const err = sinon.stub(console, 'error')
+          logger.error('test')
+          sinon.assert.calledWithExactly(err, 'test')
+          err.restore()
         })
       })
     })
@@ -94,6 +91,7 @@ describe('[logger]', () => {
   describe('silence', () => {
     it('default, replaces logging with null outputs', () => {
       const original = clone()
+      const log = sinon.stub(console, 'log')
       silence()
       logger.debug('test')
       logger.info('test')
@@ -101,14 +99,17 @@ describe('[logger]', () => {
       logger.error('test')
       sinon.assert.notCalled(log)
       expect(logger.debug).to.not.eql(original.debug)
+      log.restore()
     })
     it('with false arg, restores original logger', () => {
       const original = clone()
+      const log = sinon.stub(console, 'log')
       silence()
       silence(false)
       logger.debug('test')
       sinon.assert.calledOnce(log)
       expect(logger).to.eql(original)
+      log.restore()
     })
     it('restores external log if replaced', () => {
       replace(spyLog)
@@ -124,6 +125,13 @@ describe('[logger]', () => {
       logger.debug('test')
       sinon.assert.calledOnce(spyLog.debug)
       expect(logger.debug).to.eql(spyLog.debug)
+    })
+    it('silences separate required modules', () => {
+      const logA = require('./logger')
+      const logB = require('./logger')
+      logA.silence()
+      expect(logA.logger.info).to.eql(logB.logger.info)
+      expect(logA.logger.info).to.eql(logger.info)
     })
   })
 })

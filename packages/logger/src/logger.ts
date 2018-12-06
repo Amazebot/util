@@ -73,6 +73,5 @@ export function silence (enable = true) {
       error: () => null
     })
   }
-  typeof _silent // ?
   if (_silent) return replace(_silent)
 }

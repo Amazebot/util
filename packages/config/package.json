@@ -1,6 +1,6 @@
 {
   "name": "@amazebot/config",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Centralised app configuration loaded from ENV, CLI and/or JSON.",
   "homepage": "https://github.com/Amazebot/util/tree/master/packages/config",
   "repository": "git@github.com:Amazebot/util.git",

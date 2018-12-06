@@ -1,6 +1,6 @@
 {
   "name": "@amazebot/logger",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Basic log handling with overrides for use within other modules.",
   "homepage": "https://github.com/Amazebot/util/tree/master/packages/logger",
   "repository": "git@github.com:Amazebot/util.git",

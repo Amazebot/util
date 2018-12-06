@@ -39,7 +39,7 @@
     "updated": "lerna updated",
     "practice": "lerna version",
     "prerelease": "yarn compile",
-    "release": "lerna publish --registry https://registry.npmjs.org",
+    "release": "lerna publish",
     "release:current": "yarn release -- --from-package",
     "release:next": "yarn release -- --npm-tag next",
     "release:local": "yarn release -- --registry http://localhost:4873 --skip-git",

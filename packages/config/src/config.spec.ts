@@ -1,11 +1,38 @@
 import 'mocha'
 import { expect } from 'chai'
+import { relative } from 'path'
+import { spawn } from 'child_process'
 import { Config, IOptions } from '.'
 let initOpts: IOptions = { 'test-setting': { type: 'boolean', default: false } }
 
 describe('[config]', () => {
   beforeEach(() => process.env.TEST_SETTING = undefined)
   describe('Config', () => {
+    describe('--help', () => {
+      it('running from CLI prints help text', (done) => {
+        const path = relative(process.cwd(), `${__dirname}/config.cli.spec.ts`)
+        const args = ['-r', 'ts-node/register', path, '--help']
+        const node = spawn('node', args)
+        let output = ''
+        node.stdout.on('data', (data) => output += data.toString())
+        node.stderr.on('data', () => expect(false).to.equal(true))
+        node.on('exit', () => {
+          expect(output).to.match(/--cli-test/)
+          done()
+        })
+      })
+      it('error from CLI prints help text', (done) => {
+        const path = relative(process.cwd(), `${__dirname}/config.cli.spec.ts`)
+        const args = ['-r', 'ts-node/register', path, '-c', 'no-file.json']
+        const node = spawn('node', args)
+        let output = ''
+        node.stdout.on('data', (data) => output += data.toString())
+        node.on('exit', () => {
+          expect(output).to.match(/--help/)
+          done()
+        })
+      })
+    })
     describe('.load', () => {
       it('loads option defaults', () => {
         const config = new Config(initOpts)

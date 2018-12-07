@@ -1,4 +1,5 @@
 import 'dotenv/config'
+import { existsSync } from 'fs'
 import * as yargs from 'yargs'
 import { hyphen } from './format'
 
@@ -19,9 +20,23 @@ export class Config {
   /** Keep all manually assigned settings, to be retained on reload. */
   updates: { [key: string]: any } = {}
 
+  /** Command line usage information. */
+  info: string
+
   /** Create config instance with initial options. */
   constructor (public initOptions: IOptions, public sourcePrefix?: string) {
     this.options = Object.assign({}, initOptions)
+    const prefixNote = (sourcePrefix)
+      ? ` with the prefix \`${sourcePrefix.toUpperCase()}_\`.`
+      : `.`
+    const configName = (sourcePrefix)
+      ? `${sourcePrefix}Config`
+      : `config`
+    this.info = `---
+All option can be provided as environment variables${prefixNote}
+Config can also be declared in \`package.json\` with the key: "${configName}",
+or in a file: "${configName}.json".
+---`
   }
 
   /**
@@ -53,6 +68,18 @@ export class Config {
       .config(fileName)
       .alias('config', 'c')
       .example('config', `-c ${fileName}`)
+      .help()
+      .alias('h', 'help')
+      .epilogue(this.info)
+      .check(function (argv) {
+        if (!argv.config || existsSync(argv.config)) return true
+        else throw(new Error('Config file is not readable.'))
+      })
+      .fail((msg: string, err: Error) => {
+        console.error(msg, err)
+        console.info('Start with --help for config argument info.')
+        if (err) throw err
+      })
       .argv
     const loaded: { [key: string]: any } = {}
     for (let key in this.options) {

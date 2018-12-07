@@ -1,4 +1,3 @@
-
 /** Utility for converting option keys, from fooBar to foo-bar. */
 export function caps (str: string) {
   str = str.replace(/([a-z])([A-Z])/g, (g) => `${g[0]}_${g[1].toLowerCase()}`)

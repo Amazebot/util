@@ -1,8 +1,8 @@
 [standard]: https://standardjs.com/
 [lerna]: https://lernajs.io/
 [node]: https://nodejs.org/
-[logger]: https://github.com/Amazebot/util/tree/master/packages/logger
 [config]: https://github.com/Amazebot/util/tree/master/packages/config
+[logger]: https://github.com/Amazebot/util/tree/master/packages/logger
 
 # Amazebot Util
 
@@ -15,11 +15,15 @@
 
 ---
 
-### ⚙️ Config
+### ⚙️ [Config][config]
 Centralised app configuration loaded from ENV, CLI and/or JSON.
 
-### 📓 Logger
+[![npm version](https://badge.fury.io/js/%40amazebot%2Fconfig.svg)](https://badge.fury.io/js/%40amazebot%2Fconfig)
+
+### 📓 [Logger][logger]
 Basic log handling with overrides for use within other modules.
+
+[![npm version](https://badge.fury.io/js/%40amazebot%2Flogger.svg)](https://badge.fury.io/js/%40amazebot%2Flogger)
 
 ---
 

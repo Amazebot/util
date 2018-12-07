@@ -166,7 +166,7 @@ config.reset()
 config.get('amazing') // --> true
 ```
 
-## ConfigSet
+## ConfigMap
 
 Config Maps allow defining a set of config instances with common options and
 defaults, with different values assigned by loading a unique prefixed source.

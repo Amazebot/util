@@ -8,6 +8,9 @@
 
 [Node.js][node] utilities that provide common dependencies to bot/integration projects.
 
+[![CircleCI](https://circleci.com/gh/Amazebot/util/tree/master.svg?style=shield)](https://circleci.com/gh/Amazebot/util/tree/master)
+[![codecov](https://codecov.io/gh/Amazebot/util/branch/master/graph/badge.svg)](https://codecov.io/gh/Amazebot/util/branch/master)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)

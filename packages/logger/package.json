@@ -1,6 +1,6 @@
 {
   "name": "@amazebot/logger",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Basic log handling with overrides for use within other modules.",
   "homepage": "https://github.com/Amazebot/util/tree/master/packages/logger",
   "repository": "git@github.com:Amazebot/util.git",
@@ -19,13 +19,16 @@
   ],
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "directories": { "lib": "lib" },
-  "files": [ "lib" ],
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib"
+  ],
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
-  },
-  "dependencies": {}
+  }
 }

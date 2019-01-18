@@ -34,10 +34,11 @@
     "test": "nyc mocha **/*.spec.ts --opts mocha.opts",
     "test:coverage": "set -o allexport; source .env; set +o allexport; codecov",
     "compile": "rimraf './packages/*/lib' && tsc -b ./packages/*",
+    "compile:webpack": "lerna run compile:webpack",
     "commit": "git-cz",
     "updated": "lerna updated",
     "practice": "lerna version",
-    "build": "yarn compile && yarn test",
+    "build": "yarn compile && yarn compile:webpack && yarn test",
     "prerelease": "yarn build",
     "release": "lerna publish",
     "release:current": "yarn release -- --from-package",
@@ -51,6 +52,7 @@
     "@types/chai": "^4.1.7",
     "@types/mocha": "^5.2.5",
     "@types/sinon": "^5.0.7",
+    "awesome-typescript-loader": "^5.2.1",
     "chai": "^4.2.0",
     "codecov": "^3.1.0",
     "commitizen": "^3.0.5",
@@ -64,6 +66,9 @@
     "tslint": "^5.11.0",
     "tslint-config-standard": "^8.0.1",
     "typedoc": "^0.13.0",
-    "typescript": "^3.1.6"
+    "typescript": "^3.1.6",
+    "webpack": "^4.28.4",
+    "webpack-cli": "^3.2.1",
+    "webpack-node-externals": "^1.7.2"
   }
 }
